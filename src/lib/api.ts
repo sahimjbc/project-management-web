@@ -32,30 +32,4 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
-// api.interceptors.response.use(
-//     (config) => {
-//         return config;
-//     },
-//     async (error) => {
-//         if (error instanceof XiorError) {
-//             if (error.response?.status === 401) {
-//                 console.error("Unauthorized request, redirecting to login.");
-//                 //clear auth store
-//                 store.set(authAtom, null);
-//                 // Redirect to login page
-//                 window.location.href = "/login";
-//             } else if (error.response?.status === 403) {
-//                 console.error("Forbidden request, redirecting to login.");
-//             }
-//             console.error(`Request error:`, error);
-//         }
-
-//         if (error?.response?.status === 401) {
-//             localStorage.removeItem("REQUEST_TOKEN");
-//         }
-
-//         return Promise.reject(error);
-//     }
-// );
-
 export default api;
