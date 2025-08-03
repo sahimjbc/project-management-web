@@ -1,0 +1,21 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "logout": "Logout",
+    "login": {
+        "login": "Login",
+        "sign-in your account": "Sign in to your account",
+        "Username": "Username",
+        "password": "Password",
+        "Forgot password": "Forgot password?",
+        "page title": "Project Management System",
+        "Username is required": "Username is required",
+        "password is required": "Password is required",
+        "logging in": "Logging in...",
+        "logged in": "Logged in successfully",
+        "login failed": "Login failed. Please check your credentials."
+    },
+    "dashboard": {
+        "page title": "Dashboard | Project Management System"
+        
+    }
+}

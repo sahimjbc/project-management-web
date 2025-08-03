@@ -1,0 +1,20 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "logout": "ログアウト",
+    "login": {
+        "login": "ログイン",
+        "sign-in your account": "アカウントにサインイン",
+        "Username": "利用者コード",
+        "password": "パスワード",
+        "Forgot password": "パスワードを忘れた場合",
+        "page title": "プロジェクト管理システム",
+        "Username is required": "利用者コードは必須です。",
+        "password is required": "パスワードは必須です。",
+        "logging in": "ログイン中...",
+        "logged in": "ログインしました",
+        "login failed": "ログインに失敗しました。利用者コードとパスワードを確認してください。"
+    },
+    "dashboard": {
+        "page title": "ダッシュボード | プロジェクト管理システム"
+    }
+}
