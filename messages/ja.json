@@ -16,5 +16,21 @@
     },
     "dashboard": {
         "page title": "ダッシュボード | プロジェクト管理システム"
+    },
+    "links": {
+        "dashboard": "ダッシュボード",
+        "users": "ユーザー",
+        "user list": "ユーザー一覧",
+        "user create": "ユーザー作成",
+        "projects": "プロジェクト",
+        "project list": "プロジェクト一覧",
+        "project create": "プロジェクト作成",
+        "roles": "ロール",
+        "roles list": "ロール一覧",
+        "roles create": "ロール作成",
+        "permissions list": "権限一覧",
+        "settings": "設定",
+        "reports": "レポート",
+        "reports list": "レポート一覧"
     }
 }

@@ -4,20 +4,37 @@ type UserRole =
   | "Team-Leader"
   | "Team-Member";
 type UserPermission =
-  | "users"
-  | "dashboard"
-  | "settings"
-  | "projects"
-  | "reports"
-  | "roles";
+  | "users.view"
+  | "users.create"
+  | "users.edit"
+  | "users.delete"
+  | "dashboard.view"
+  | "settings.view"
+  | "settings.edit"
+  | "projects.view"
+  | "projects.create"
+  | "projects.edit"
+  | "projects.delete"
+  | "reports.view"
+  | "reports.create"
+  | "reports.edit"
+  | "reports.delete"
+  | "roles.view"
+  | "roles.create"
+  | "roles.edit"
+  | "roles.delete"
+  | "permissions.view"
+  | "permissions.create"
+  | "permissions.edit"
+  | "permissions.delete";
 
 type AuthUser = {
   id: number;
   username: null | string;
   email: null | string;
-  roles: UserRole[];
+  role: UserRole;
   permissions: UserPermission[];
-  is_varified: null | boolean;
+  is_verified: boolean;
   phone: null | string;
   avatar: null | string;
 };

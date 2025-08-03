@@ -10,6 +10,8 @@ import { Settings, LogOut, ChevronsUpDown } from "lucide-react";
 import { useLogout } from "@/api/auth.api";
 import { useAtom } from "jotai/react";
 import { authAtom } from "@/store";
+import { Link } from "@tanstack/react-router";
+import { m } from "@/paraglide/messages";
 
 export function AppSidebarFooter() {
   const [auth] = useAtom(authAtom);
@@ -49,7 +51,9 @@ export function AppSidebarFooter() {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
+          <Link to="/settings/" className="flex-1">
+            {m["links.settings"]()}
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => logout.mutate()}

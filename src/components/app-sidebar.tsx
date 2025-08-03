@@ -1,14 +1,4 @@
-import {
-  Calendar,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  Mail,
-  Star,
-  ChevronRight,
-  ChevronDown,
-} from "lucide-react";
+import { ChevronRight, ChevronDown } from "lucide-react";
 
 import {
   Sidebar,
@@ -33,37 +23,37 @@ import { useState } from "react";
 import { TeamSwitcher } from "./team-switcher";
 import { AppSidebarFooter } from "./app-sidebar-footer";
 
-const simpleItems = [
-  { title: "Dashboard", url: "/", icon: Home },
-  { title: "Search", url: "#Search", icon: Search },
-  { title: "Settings", url: "#Settings", icon: Settings },
-];
-
-const collapsibleItems = [
-  {
-    title: "Inbox",
-    icon: Inbox,
-    subItems: [
-      { title: "All Mail", url: "#All-Mail", icon: Mail },
-      { title: "Starred", url: "#Started", icon: Star },
-    ],
-  },
-  {
-    title: "Calendar",
-    icon: Calendar,
-    subItems: [{ title: "Events", url: "#events", icon: Calendar }],
-  },
-];
+import { navLinks } from "@/lib/links";
+import { useAtom } from "jotai/react";
+import { authAtom } from "@/store";
 
 export function AppSidebar() {
+  
   const [openStates, setOpenStates] = useState<Record<string, boolean>>({});
-
+  
   const toggleOpen = (key: string) => {
     setOpenStates((prev) => ({
       ...prev,
       [key]: !prev[key],
     }));
   };
+  const [auth] = useAtom(authAtom);
+  if (!auth) {
+    return null; 
+  }
+  console.log(auth.user.permissions);
+  
+  // mergedLinkId = auth.user.permissions.map((perm) => `${perm[""]}.view`);
+  const authorizedGroups = navLinks.reduce<typeof navLinks>((acc, group) => {
+    const authorizedLinks = group.links.filter((link) => {      
+      return auth.user.permissions.includes(link.id);
+    });
+
+    if (authorizedLinks.length) {
+      acc.push({ ...group, links: authorizedLinks });
+    }
+    return acc;
+  }, []);
 
   return (
     <Sidebar>
@@ -79,32 +69,38 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <TeamSwitcher />
-              {simpleItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url} className="flex items-center gap-2">
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
 
-              {collapsibleItems.map((section) => {
-                const isOpen = openStates[section.title] || false;
+              {authorizedGroups.map((group) => {
+                const isGroupCollapsible = group.links.length > 1;
+                const isOpen = openStates[group.key] || false;
+
+                if (!isGroupCollapsible) {
+                  const item = group.links[0];
+                  return (
+                    <SidebarMenuItem key={item.id}>
+                      <SidebarMenuButton asChild>
+                        <a href={item.path} className="flex items-center gap-2">
+                          {item.icon && <item.icon className="w-4 h-4" />}
+                          <span>{item.label}</span>
+                        </a>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                }
+
                 return (
                   <Collapsible
-                    key={section.title}
+                    key={group.key}
                     open={isOpen}
-                    onOpenChange={() => toggleOpen(section.title)}
+                    onOpenChange={() => toggleOpen(group.key)}
                     className="group/collapsible"
                   >
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
                         <SidebarMenuButton className="flex items-center justify-between w-full">
                           <div className="flex items-center gap-2">
-                            <section.icon className="w-4 h-4" />
-                            <span>{section.title}</span>
+                            {group.icon && <group.icon className="w-4 h-4" />}
+                            <span>{group.group}</span>
                           </div>
                           {isOpen ? (
                             <ChevronDown className="w-4 h-4 transition-transform" />
@@ -116,14 +112,14 @@ export function AppSidebar() {
                     </SidebarMenuItem>
                     <CollapsibleContent className="pl-4">
                       <SidebarMenuSub>
-                        {section.subItems.map((sub) => (
-                          <SidebarMenuSubItem key={sub.title}>
+                        {group.links.map((item) => (
+                          <SidebarMenuSubItem key={item.id}>
                             <a
-                              href={sub.url}
+                              href={item.path}
                               className="flex items-center gap-2"
                             >
-                              <sub.icon className="w-4 h-4" />
-                              <span>{sub.title}</span>
+                              {item.icon && <item.icon className="w-4 h-4" />}
+                              <span>{item.label}</span>
                             </a>
                           </SidebarMenuSubItem>
                         ))}

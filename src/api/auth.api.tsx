@@ -8,11 +8,29 @@ import { RESET } from "jotai/utils";
 import { toast } from "sonner";
 import type { XiorError } from "xior";
 
+type UserActions = "view" | "create" | "edit" | "delete";
+type UserMenu = "users" | "projects" | "dashboard" | "settings" | "reports" | "roles" | "permissions" ;
+
 type LoginResponse = {
-    message: string;
-    user: AuthUser;
-    token: string;
+  refresh_token: string;
+  access_token: string;
+  message: string;
+  user: {
+    id: number;
+    username: string;
+    email: string;
+    role: UserRole;
+    is_verified: boolean;
+    phone: string | null;
+    avatar: string | null;
+    permissions: {
+      id: number;
+      action_name: UserActions;
+      menu_name: UserMenu;
+    }[];
+  };
 };
+
 
 export function useLogin() {
     const [, setAuth] = useAtom(authAtom);
@@ -38,9 +56,16 @@ export function useLogin() {
         },
         onSuccess: (data, _, context) => {
             toast.success(m["login.logged in"](), { id: context.toastId });
+           const mergedUserPermission = data.user.permissions.map((per) => {
+             return `${per.menu_name}.${per.action_name}` as UserPermission;
+           });
+           console.log(mergedUserPermission);
             setAuth({
-                user: data.user,
-                token: data.token,
+              user: {
+                ...data.user,
+                permissions: mergedUserPermission,
+              },
+              token: data.access_token,
             });
         },
         onError: (error, _, context) => {

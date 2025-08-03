@@ -16,6 +16,21 @@
     },
     "dashboard": {
         "page title": "Dashboard | Project Management System"
-        
+    },
+    "links": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "user list": "User List",
+        "user create": "Create User",
+        "projects": "Projects",
+        "project list": "Project List",
+        "project create": "Create Project",
+        "roles": "Roles",
+        "roles list": "Role List",
+        "roles create": "Create Role",
+        "permissions list": "Permissions",
+        "settings": "Settings",
+        "reports": "Reports",
+        "reports list": "Report List"
     }
 }
