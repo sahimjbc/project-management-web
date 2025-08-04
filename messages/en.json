@@ -33,5 +33,8 @@
         "settings": "Settings",
         "reports": "Reports",
         "reports list": "Report List"
+    },
+    "settings":{
+        "page title": "Settings | Project Management System"
     }
 }

@@ -51,7 +51,7 @@ export function AppSidebarFooter() {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
-          <Link to="/settings/" className="flex-1">
+          <Link to="/settings" className="flex-1">
             {m["links.settings"]()}
           </Link>
         </DropdownMenuItem>
@@ -59,8 +59,8 @@ export function AppSidebarFooter() {
           onClick={() => logout.mutate()}
           className="text-red-600"
         >
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+          <LogOut className="mr-2 h-4 w-4 text-red-600" />
+          <span>{m["logout"]()}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
