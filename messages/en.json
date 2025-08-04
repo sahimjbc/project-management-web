@@ -15,7 +15,8 @@
         "login failed": "Login failed. Please check your credentials."
     },
     "dashboard": {
-        "page title": "Dashboard | Project Management System"
+        "page title": "Dashboard | Project Management System",
+        "chart title": "Team Wise Man Hour | Chart"
     },
     "links": {
         "dashboard": "Dashboard",
