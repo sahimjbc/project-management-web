@@ -28,9 +28,8 @@ import { useAtom } from "jotai/react";
 import { authAtom } from "@/store";
 
 export function AppSidebar() {
-  
   const [openStates, setOpenStates] = useState<Record<string, boolean>>({});
-  
+
   const toggleOpen = (key: string) => {
     setOpenStates((prev) => ({
       ...prev,
@@ -39,13 +38,11 @@ export function AppSidebar() {
   };
   const [auth] = useAtom(authAtom);
   if (!auth) {
-    return null; 
+    return null;
   }
-  console.log(auth.user.permissions);
-  
-  // mergedLinkId = auth.user.permissions.map((perm) => `${perm[""]}.view`);
+
   const authorizedGroups = navLinks.reduce<typeof navLinks>((acc, group) => {
-    const authorizedLinks = group.links.filter((link) => {      
+    const authorizedLinks = group.links.filter((link) => {
       return auth.user.permissions.includes(link.id);
     });
 
