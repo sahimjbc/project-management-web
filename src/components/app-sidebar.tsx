@@ -68,7 +68,7 @@ export function AppSidebar() {
               <TeamSwitcher />
 
               {authorizedGroups.map((group) => {
-                const isGroupCollapsible = group.links.length > 1;
+                const isGroupCollapsible = group.links.length > 0;
                 const isOpen = openStates[group.key] || false;
 
                 if (!isGroupCollapsible) {

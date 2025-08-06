@@ -1,6 +1,7 @@
 import { m } from "@/paraglide/messages";
 import {
   File,
+  FileInput,
   FolderIcon,
   FolderOpen,
   Home,
@@ -108,6 +109,7 @@ export const navLinks: NavGroup[] = [
   {
     key: "reports",
     group: m["links.reports"](),
+    icon: FileInput,
     links: [
       {
         label: m["links.reports list"](),
